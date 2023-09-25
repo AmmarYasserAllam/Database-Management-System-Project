@@ -158,14 +158,15 @@ Drop Table [olist_order_items_dataset]
 
 --------------------------------------
 ---Checking for (order_id and product_id) duplicates in items_dataset table
-Select 
+Select * 
+From (
+      Select 
 	     *,ROW_NUMBER() Over(Partition by order_id,product_id Order by order_id,product_id) as RN
       From
-	     [items_dataset]
+	     [items_dataset]) as te
 		 
   Where
 	  RN > 1
-
 /*********************************** order_Reviews table ****************************************/
 /***********************************************************************************************/
 
